@@ -1,0 +1,48 @@
+<!-- replace,Search and no of occurances -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Document Processing Tool</h1>
+    <label for="documentInput">Enter Document</label>
+    <textarea name="documentInput" id="documentInput" placeholder="Type or place your document here..."></textarea>
+    <br><br>
+    <label for="documentInput">Find and Replace Text</label>
+    <input type="text" id="findText" placeholder="Enter text to find">
+    <input type="text" id="replaceText" placeholder="Enter text to replace">
+    <br><br>
+    <label for="countWords">Count Occurences of Word</label>
+    <input type="text" id="countWords" placeholder="Enter text to count">
+    <br><br>
+    <button id="processDocument" onclick="processedDocument()">Process Document</button>
+    <div id="processedDocument"></div>
+
+    <script>
+        function processedDocument() {
+            var input = document.getElementById("documentInput").value;
+            var find = document.getElementById("findText").value;
+            var replace = document.getElementById("replaceText").value;
+            var wordcount = document.getElementById("countWords").value;
+    //main line to search and replace--------------------------
+            var res = input.split(find).join(replace);
+
+            //var res = input.replaceAll(find, replace);
+
+            //no . of occurances
+            var regex = new RegExp('\\b' + wordcount + '\\b', 'gi');
+            var matches = res.match(regex);
+            var occurrences = matches ? matches.length : 0;
+            
+            document.getElementById("processedDocument").innerHTML = 
+                `<p>Processed Document:</p>
+                <p>Document with replaced Text:${res}</p>
+                <p>Occurrences of "${wordcount}": ${occurrences}</p>`;
+        }
+    </script>
+
+</body>
+</html>

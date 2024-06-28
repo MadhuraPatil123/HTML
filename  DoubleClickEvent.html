@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #error, #image, #total, #likes {
+            display: none;
+        }
+    </style>
+   
+</head>
+<body>
+    <h2>Login</h2>
+    <label for="username">Username:</label>
+    <input type="text" id="username"><br><br>
+    <label for="password">Password:</label>
+    <input type="text" id="password"><br><br>
+    <button id="login" onclick="getin()">login</button>
+    <div id="error">Incorrect username/Password</div>
+    <img id="image" src="https://app.e-box.co.in/uploads/Image/ebox.png" alt="Ebox logo">
+    <button id="likes" ondblclick="increaseLike()">Like</button>
+    <div id="total"></div>
+    <script>
+        var tlikes = 0;
+        function getin() {
+            var uname = document.getElementById("username").value;
+            var error = document.getElementById("error");
+            var pass = document.getElementById("password").value;
+            var image = document.getElementById("image");
+            var likes = document.getElementById("likes");
+            var total = document.getElementById("total");
+
+            if(uname == "john" && pass == "john123"){
+                //document.getElementById("error").innerHTML = `Incorrect username/Password`;
+                error.style.display = 'none';
+                image.style.display = 'block';
+                likes.style.display = 'block';
+                total.style.display = 'block';
+            }
+            else{
+                error.style.display = 'block';
+                image.style.display = 'none';
+                likes.style.display = 'none';
+                total.style.display = 'none';
+
+            }
+        }
+        function increaseLike() {
+            
+            tlikes++;
+            document.getElementById('total').innerHTML = `${tlikes} likes`
+        }
+    </script>
+</body>
+</html>

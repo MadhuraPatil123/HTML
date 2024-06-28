@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Market Billing System</h1>
+    <br>
+    <p>Add Product Item</p>
+    <label for="name">Product Name</label>
+    <input type="text" id="name"><br><br>
+    <label for="price">Price</label>
+    <input type="text" id="price"><br><br>
+    <label for="quantity">Quantity</label>
+    <input type="text" id="quantity"><br><br>
+    <button id="addItem" onclick="addProduct()">+ Add Item</button>
+
+    <label for="net_total">Bill Details of total items</label>
+    <h3 id="net_total">Your net amount is Rs.0</h3>
+    <table id="table" border="1px">
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+
+    <script>
+        var products = [];
+        function addProduct() {
+            var pname = document.getElementById("name").value;
+            var pquantity = parseInt(document.getElementById("quantity").value);
+            var pprice = parseInt(document.getElementById("price").value);
+            
+            let pTotal =  pquantity * pprice;
+            products.push({
+                    name:pname,
+                    quanitity : pquantity,
+                    price : pprice,
+                    total : pTotal
+                });
+            var tbody = document.querySelector("#table tbody");
+            var row = tbody.insertRow();
+            row.insertCell(0).innerHTML = pname;
+            row.insertCell(1).innerHTML = pquantity;
+            row.insertCell(2).innerHTML = pprice;
+            row.insertCell(3).innerHTML = pTotal;
+
+            var productTotal = products.reduce((sum, product) => sum + product.total,0);
+            document.getElementById("net_total").innerHTML = `Your net amount is Rs.${productTotal}`;
+        }
+
+
+    </script>
+</body>
+</html>
